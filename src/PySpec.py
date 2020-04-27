@@ -1,7 +1,6 @@
 from logging import basicConfig, error, ERROR, getLevelName
-from tkinter import Tk, Frame, Label, PhotoImage, Radiobutton, Button, StringVar, Canvas, Scrollbar
+from tkinter import Tk, Frame, Label, PhotoImage, Radiobutton, Button, StringVar, Canvas, Scrollbar, ttk
 from PIL import Image, ImageTk
-from tkinter import ttk
 from typing import ClassVar
 from wmi import WMI
 from os import getcwd, path
@@ -84,7 +83,7 @@ class App:
         # about frame
         info_frame: ClassVar = Frame(self.about_frame, background='#111')
         Label(info_frame, image=self.logo_small, text=' PySpec', font=('Consolas', 20), compound='left', background='#111', foreground='#fff', anchor='w', justify='left').place(x=5, y=5)
-        Label(info_frame, text='Version: 1.0.0\nAuthor: Mateusz Perczak\nDate: 10-04-2020\nLicence: MIT', font=('Consolas', 12), compound='left', background='#111', foreground='#fff', anchor='w', justify='left').place(x=5, y=50)   
+        Label(info_frame, text='Version: 1.0.1\nAuthor: Mateusz Perczak\nDate: 10-04-2020\nLicence: MIT', font=('Consolas', 12), compound='left', background='#111', foreground='#fff', anchor='w', justify='left').place(x=5, y=50)   
         ttk.Button(info_frame, image=self.bug, takefocus=False, style='info.TButton', command=self.open_issue).place(relx=1, rely=1, width=52, height=52, anchor='se')
         ttk.Button(info_frame, image=self.git, takefocus=False, style='info.TButton', command=self.open_git).place(relx=1, rely=0, width=52, height=52, anchor='ne')
         info_frame.place(relx=0.5, y=25, relwidth=0.92, height=140, anchor='n')
@@ -191,30 +190,22 @@ class App:
             self.dump(err_obj)
         # end
         # select_frame
-        self.cpu_button: ClassVar = Radiobutton(self.select_frame, relief='flat', image=self.cpu, indicatoron=False, bd=0, background='#111'
-        , selectcolor='#212121', takefocus=False, highlightbackground='#222', activebackground='#222', variable=self.selected, value='cpu', command=self.show_card)
-        self.gpu_button: ClassVar = Radiobutton(self.select_frame, image=self.gpu, relief='flat', indicatoron=False, bd=0, background='#111'
-        , selectcolor='#212121', takefocus=False, highlightbackground='#222', activebackground='#222', variable=self.selected, value='gpu', command=self.show_card)
-        self.ram_button: ClassVar = Radiobutton(self.select_frame, image=self.ram, indicatoron=False, bd=0, background='#111'
-        , selectcolor='#212121', takefocus=False, highlightbackground='#222', activebackground='#222', variable=self.selected, value='ram', command=self.show_card)
-        self.mlb_button: ClassVar = Radiobutton(self.select_frame, image=self.mlb, indicatoron=False, bd=0, background='#111'
-        , selectcolor='#212121', takefocus=False, highlightbackground='#222', activebackground='#222', variable=self.selected, value='mlb', command=self.show_card)
-        self.hdd_button: ClassVar = Radiobutton(self.select_frame, image=self.hdd, indicatoron=False, bd=0, background='#111'
-        , selectcolor='#212121', takefocus=False, highlightbackground='#222', activebackground='#222', variable=self.selected, value='hdd', command=self.show_card)
-        self.bios_button: ClassVar = Radiobutton(self.select_frame, image=self.bios, indicatoron=False, bd=0, background='#111'
-        , selectcolor='#212121', takefocus=False, highlightbackground='#222', activebackground='#222', variable=self.selected, value='bios', command=self.show_card)
-        self.network_button: ClassVar = Radiobutton(self.select_frame, image=self.network, indicatoron=False, bd=0, background='#111'
-        , selectcolor='#212121', takefocus=False, highlightbackground='#222', activebackground='#222', variable=self.selected, value='network', command=self.show_card)
-        self.about_button: ClassVar = Radiobutton(self.select_frame, image=self.about, indicatoron=False, bd=0, background='#111'
-        , selectcolor='#212121', takefocus=False, highlightbackground='#222', activebackground='#222', variable=self.selected, value='about', command=self.show_card)
-        self.cpu_button.place(x=0, y=0, width=52, relheight=1)
-        self.gpu_button.place(x=52, y=0, width=52, relheight=1)
-        self.ram_button.place(x=104, y=0, width=52, relheight=1)
-        self.mlb_button.place(x=156, y=0, width=52, relheight=1)
-        self.hdd_button.place(x=208, y=0, width=52, relheight=1)
-        self.bios_button.place(x=260, y=0, width=52, relheight=1)
-        self.network_button.place(x=312, y=0, width=52, relheight=1)
-        self.about_button.place(relx=1, rely=1, width=52, relheight=1, anchor='se')
+        Radiobutton(self.select_frame, relief='flat', image=self.cpu, indicatoron=False, bd=0, background='#111'
+        , selectcolor='#212121', takefocus=False, highlightbackground='#222', activebackground='#222', variable=self.selected, value='cpu', command=self.show_card).place(x=0, y=0, width=52, relheight=1)
+        Radiobutton(self.select_frame, image=self.gpu, relief='flat', indicatoron=False, bd=0, background='#111'
+        , selectcolor='#212121', takefocus=False, highlightbackground='#222', activebackground='#222', variable=self.selected, value='gpu', command=self.show_card).place(x=52, y=0, width=52, relheight=1)
+        Radiobutton(self.select_frame, image=self.ram, indicatoron=False, bd=0, background='#111'
+        , selectcolor='#212121', takefocus=False, highlightbackground='#222', activebackground='#222', variable=self.selected, value='ram', command=self.show_card).place(x=104, y=0, width=52, relheight=1)
+        Radiobutton(self.select_frame, image=self.mlb, indicatoron=False, bd=0, background='#111'
+        , selectcolor='#212121', takefocus=False, highlightbackground='#222', activebackground='#222', variable=self.selected, value='mlb', command=self.show_card).place(x=156, y=0, width=52, relheight=1)
+        Radiobutton(self.select_frame, image=self.hdd, indicatoron=False, bd=0, background='#111'
+        , selectcolor='#212121', takefocus=False, highlightbackground='#222', activebackground='#222', variable=self.selected, value='hdd', command=self.show_card).place(x=208, y=0, width=52, relheight=1)
+        Radiobutton(self.select_frame, image=self.bios, indicatoron=False, bd=0, background='#111'
+        , selectcolor='#212121', takefocus=False, highlightbackground='#222', activebackground='#222', variable=self.selected, value='bios', command=self.show_card).place(x=260, y=0, width=52, relheight=1)
+        Radiobutton(self.select_frame, image=self.network, indicatoron=False, bd=0, background='#111'
+        , selectcolor='#212121', takefocus=False, highlightbackground='#222', activebackground='#222', variable=self.selected, value='network', command=self.show_card).place(x=312, y=0, width=52, relheight=1)
+        Radiobutton(self.select_frame, image=self.about, indicatoron=False, bd=0, background='#111'
+        , selectcolor='#212121', takefocus=False, highlightbackground='#222', activebackground='#222', variable=self.selected, value='about', command=self.show_card).place(relx=1, rely=1, width=52, relheight=1, anchor='se')
         # end
         self.welcome_frame.tkraise()
         self.main_window.deiconify()
