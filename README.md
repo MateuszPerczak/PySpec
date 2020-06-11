@@ -17,6 +17,9 @@
 + ctypes
 + json
 
+## Icons
+https://icons8.com/
+
 ## Some pictures of application
 ![Picture 1](https://raw.githubusercontent.com/losek1/PySpec/master/img/IMG1.png)
 ![Picture 2](https://raw.githubusercontent.com/losek1/PySpec/master/img/IMG2.png)
