@@ -42,14 +42,10 @@ class Theme:
         # label
         self.parent.layout.configure('TLabel', background=self.colors[theme][0], relief='flat', font=(
             'catamaran 12 bold'), foreground=self.colors[theme][3])
+        self.parent.layout.configure('center.TLabel', background=self.colors[theme][0], relief='flat', font=(
+            'catamaran 12 bold'), foreground=self.colors[theme][3], anchor='c')
         # rqadio button
         self.parent.layout.configure('TRadiobutton', background=self.colors[theme][0], relief='flat', font=(
             'catamaran 13 bold'), foreground=self.colors[theme][3], anchor='w', padding=5, width=12)
         self.parent.layout.map('TRadiobutton', background=[('pressed', '!disabled', self.colors[theme][1]), (
             'active', self.colors[theme][1]), ('selected', self.colors[theme][1])])
-
-
-class Icons:
-    def __init__(self: object, parent: Tk) -> object:
-        # pass parent object
-        self.parent = parent

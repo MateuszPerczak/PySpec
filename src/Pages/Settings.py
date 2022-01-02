@@ -1,5 +1,5 @@
 from tkinter import ttk
-from Components import View
+from dataclasses import dataclass
 
 
 class Page(ttk.Frame):
@@ -9,6 +9,13 @@ class Page(ttk.Frame):
         self.parent = parent
         # page layout
         Theme(self).pack(fill='x')
+
+
+@dataclass
+class NavItem:
+    icon: str = 'settings.png'
+    name: str = 'Settings'
+    page: object = Page
 
 
 class Theme(ttk.Frame):
