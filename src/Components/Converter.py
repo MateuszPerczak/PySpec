@@ -5,13 +5,17 @@ def BytesToGigabytes(size: int) -> str:
     return f"{round(float(float(float(size / 1024) / 1024) / 1024), 3)} GB"
 
 def KilobytesToMegabytes(size: int) -> str:
-    return f"{float(size / 1024)} MB" 
+    return f"{float(size / 1024)} MB"
 
 def MegabytesToGigabytes(size: int) -> str:
-    return f"{float(size / 1024)} GB" 
+    return f"{float(size / 1024)} GB"
 
 def MillivoltsToVolts(size: int) -> str:
-    return f"{float(size / 1000)} V" 
+    return f"{float(size / 1000)} V"
+
+def MHzToGHz(size: float) -> float:
+    return f"{float(size / 1000)} GHz"
+
 
 # B = float(size * 8)
 # KB = float(B / 1024)

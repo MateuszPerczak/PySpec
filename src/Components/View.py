@@ -1,5 +1,5 @@
-from tkinter import PhotoImage, Tk, ttk
-
+from tkinter import Tk, ttk
+from Components.SystemTheme import get_theme
 
 class Layout:
     def __init__(self: object, parent: Tk) -> object:
@@ -28,10 +28,18 @@ class Theme:
     def __init__(self: object, parent: Tk) -> None:
         # pass parent object
         self.parent = parent
-        self.colors: dict = {'Dark': ['#000', '#111', '#222', '#ecf0f1'], 'Light': [
+        self.colors: dict = {'Dark': ['#111', '#212121', '#333', '#fff'], 'Light': [
             '#fff', '#ecf0f1', '#ecf0f1', '#000']}
 
+        self.system_theme: str = get_theme()
+
+
+        self.colors['System'] = self.colors[self.system_theme]
+        
+        self.applied_theme: str = 'Light'
+
     def apply(self: object, theme: str) -> None:
+        self.applied_theme = theme
         # pass parent object
         self.parent.configure(background=self.colors[theme][1])
         # frames
@@ -44,8 +52,28 @@ class Theme:
             'catamaran 12 bold'), foreground=self.colors[theme][3])
         self.parent.layout.configure('center.TLabel', background=self.colors[theme][0], relief='flat', font=(
             'catamaran 12 bold'), foreground=self.colors[theme][3], anchor='c')
+        self.parent.layout.configure(
+            'big.TLabel', background=self.colors[theme][1], font=('catamaran 16 bold'))
+        self.parent.layout.configure(
+            'small.TLabel', background=self.colors[theme][0], font=('catamaran 9 bold'))
         # rqadio button
         self.parent.layout.configure('TRadiobutton', background=self.colors[theme][0], relief='flat', font=(
             'catamaran 13 bold'), foreground=self.colors[theme][3], anchor='w', padding=5, width=12)
         self.parent.layout.map('TRadiobutton', background=[('pressed', '!disabled', self.colors[theme][1]), (
             'active', self.colors[theme][1]), ('selected', self.colors[theme][1])])
+        self.parent.layout.configure('small.TRadiobutton',
+                              anchor='center', padding=5, width=8)
+        # scrollbar
+        self.parent.layout.configure('Vertical.TScrollbar', gripcount=0, relief='flat', background=self.colors[theme][1], darkcolor=self.colors[theme][1], lightcolor=self.colors[theme][1], troughcolor=self.colors[theme][1], bordercolor=self.colors[theme][1])
+        self.parent.layout.map('Vertical.TScrollbar', background=[('pressed', '!disabled', self.colors[theme][0]), (
+            'disabled', self.colors[theme][1]), ('active', self.colors[theme][0]), ('!active', self.colors[theme][0])])
+
+
+    def get_theme(self: object) -> str:
+        if self.applied_theme == 'System':
+            return self.system_theme
+        return self.applied_theme
+
+    def get_internal_theme(self: object) -> str:
+        return self.applied_theme
+

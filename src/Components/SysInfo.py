@@ -46,7 +46,7 @@ class Provider:
     def get_cpus(self: object) -> dict:
         cpus: list = []
         for cpu in self.wmi_object.Win32_Processor():
-            cpus.append({'name': cpu.Name, 'family': self.cpu_family[f'{cpu.Family}'], 'cores': cpu.NumberOfCores, 'threads': cpu.ThreadCount, 'clock_speed': cpu.CurrentClockSpeed, 'architecture': self.cpu_architecture[f'{cpu.Architecture}'], 'manufacturer': cpu.Manufacturer, 'description': cpu.Description})
+            cpus.append({'name': cpu.Name, 'family': self.cpu_family[f'{cpu.Family}'], 'cores': cpu.NumberOfCores, 'threads': cpu.ThreadCount, 'clock_speed': float(cpu.CurrentClockSpeed), 'architecture': self.cpu_architecture[f'{cpu.Architecture}'], 'manufacturer': cpu.Manufacturer, 'description': cpu.Description})
         return cpus
 
     def get_rams(self: object) -> list:
