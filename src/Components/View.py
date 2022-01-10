@@ -55,7 +55,7 @@ class Theme:
         self.parent.layout.configure(
             'big.TLabel', background=self.colors[theme][1], font=('catamaran 16 bold'))
         self.parent.layout.configure(
-            'small.TLabel', background=self.colors[theme][0], font=('catamaran 9 bold'))
+            'small.TLabel', background=self.colors[theme][0], font=('catamaran 10 bold'))
         # rqadio button
         self.parent.layout.configure('TRadiobutton', background=self.colors[theme][0], relief='flat', font=(
             'catamaran 13 bold'), foreground=self.colors[theme][3], anchor='w', padding=5, width=12)
