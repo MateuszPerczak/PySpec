@@ -1,5 +1,4 @@
 from tkinter import ttk, StringVar, PhotoImage, Canvas, Event
-from collections import namedtuple
 
 class NavigationView(ttk.Frame):
     def __init__(self: object, parent: object, theme: object) -> ttk.Frame:
