@@ -1,10 +1,9 @@
 from tkinter import Tk
-from Pages import Settings, Processor, Memory, Storeage, VideoCard, Motherboard
+from Pages import Settings, Processor, Memory, Storage, VideoCard, Motherboard
 from Components import View
 from Components.NavigationView import NavigationView
 from Components.Inithandler import InitPage
 from Components.SysInfo import Provider
-
 
 class PySpec(Tk):
     def __init__(self: object) -> object:
@@ -25,9 +24,7 @@ class PySpec(Tk):
         self.after(100, self.__init)
         self.mainloop()
 
-    
     def __init(self: object) -> object:
-
         # init wmi platform
         self.provider = Provider()
         # unload loading page
@@ -35,7 +32,6 @@ class PySpec(Tk):
         del self.init_page
         # init gui
         self.__init_gui()
-
 
     def __init_gui(self: object) -> object:
         self.navigation: NavigationView = NavigationView(self, theme=self.theme)
@@ -46,7 +42,7 @@ class PySpec(Tk):
         self.navigation.add_item(VideoCard.NavItem(), props={'hardware': self.provider})
         self.navigation.add_item(Memory.NavItem(), props={'hardware': self.provider})
         self.navigation.add_item(Motherboard.NavItem(), props={'hardware': self.provider})
-        self.navigation.add_item(Storeage.NavItem(), props={'hardware': self.provider})
+        self.navigation.add_item(Storage.NavItem(), props={'hardware': self.provider})
         # select forst page
         self.navigation.select('Processor')
 

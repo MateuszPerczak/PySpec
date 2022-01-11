@@ -47,22 +47,24 @@ class Provider:
             return []
 
     def get_cpus(self: object) -> dict:
-        try:
+
             cpus: list = []
             for cpu in self.wmi_object.Win32_Processor():
-                cpus.append({'name': cpu.Name, 'family': self.cpu_family[f'{cpu.Family}'], 'cores': cpu.NumberOfCores, 'threads': cpu.ThreadCount, 'clock_speed': float(cpu.CurrentClockSpeed), 'architecture': self.cpu_architecture[f'{cpu.Architecture}'], 'manufacturer': cpu.Manufacturer, 'description': cpu.Description})
+                try:
+                    cpus.append({'name': cpu.Name, 'family': self.cpu_family[f'{cpu.Family}'], 'cores': cpu.NumberOfCores, 'threads': cpu.ThreadCount, 'clock_speed': float(cpu.CurrentClockSpeed), 'architecture': self.cpu_architecture[f'{cpu.Architecture}'], 'manufacturer': cpu.Manufacturer, 'description': cpu.Description})
+                except Exception as _:
+                    pass
             return cpus
-        except Exception as _:
-            return []
 
     def get_rams(self: object) -> list:
-        try:
             rams: list = []
             for memory in self.wmi_object.Win32_PhysicalMemory():
-                rams.append({'manufacturer': memory.Manufacturer, 'capacity': int(memory.Capacity), 'speed': int(memory.Speed), 'type': self.ram_type[f'{memory.SMBIOSMemoryType}'], 'part_number': memory.PartNumber.strip(), 'serial': memory.SerialNumber, 'form_factor': self.ram_form[f'{memory.FormFactor}'], 'slot': memory.DeviceLocator, 'voltage': int(memory.ConfiguredVoltage), 'bank': memory.BankLabel})
+                try:
+                    rams.append({'manufacturer': memory.Manufacturer, 'capacity': int(memory.Capacity), 'speed': int(memory.Speed), 'type': self.ram_type[f'{memory.SMBIOSMemoryType}'], 'part_number': memory.PartNumber.strip(), 'serial': memory.SerialNumber, 'form_factor': self.ram_form[f'{memory.FormFactor}'], 'slot': memory.DeviceLocator, 'voltage': int(memory.ConfiguredVoltage), 'bank': memory.BankLabel})
+                except Exception as _:
+                    pass
             return rams
-        except Exception as _:
-            return []
+
 
     def get_motherboard(self: object) -> dict:
         try:
@@ -77,11 +79,21 @@ class Provider:
             return {}
 
     def get_bios(self: object) -> list:
-        try:
+
             bioses: list = []
             for bios in self.wmi_object.Win32_BIOS():
-                bioses.append({'primary': bios.PrimaryBIOS, 'version': bios.SMBIOSBIOSVersion, 'manufacturer': bios.Manufacturer, 'release': f'{bios.ReleaseDate[6:8]}-{bios.ReleaseDate[4:6]}-{bios.ReleaseDate[0:4]}'})
+                try:
+                    bioses.append({'primary': bios.PrimaryBIOS, 'version': bios.SMBIOSBIOSVersion, 'manufacturer': bios.Manufacturer, 'release': f'{bios.ReleaseDate[6:8]}-{bios.ReleaseDate[4:6]}-{bios.ReleaseDate[0:4]}'})
+                except Exception as _:
+                    pass
             return bioses
-        except Exception as _:
-            return []
+
+    def get_storage(self: object) -> list:
+        storages: list = []
+        for storage in self.wmi_object.Win32_DiskDrive():
+            try:
+                storages.append({'firmware': storage.FirmwareRevision.strip(), 'model': storage.Model, 'size': int(storage.Size), 'serial': storage.SerialNumber.strip(), 'supports': storage.CapabilityDescriptions, 'id': storage.DeviceID})
+            except Exception as _:
+                pass
+        return storages
 
