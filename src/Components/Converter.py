@@ -7,6 +7,9 @@ def BytesToGigabytes(size: int) -> str:
 def KilobytesToMegabytes(size: int) -> str:
     return f"{float(size / 1024)} MB"
 
+def KilobytesToGigabytes(size: int) -> str:
+    return f"{float((size / 1024) / 1024)} GB"
+
 def MegabytesToGigabytes(size: int) -> str:
     return f"{float(size / 1024)} GB"
 

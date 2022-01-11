@@ -1,7 +1,6 @@
 from tkinter import ttk, StringVar, PhotoImage, DoubleVar, Event
 from dataclasses import dataclass
 
-
 class Page(ttk.Frame):
     def __init__(self: object, parent: object, props: dict) -> ttk.Frame:
         super().__init__(parent)
@@ -12,14 +11,12 @@ class Page(ttk.Frame):
         Theme(self, props['theme']).pack(fill='x', padx=10, pady=(0, 10))
         About(self, props['theme']).pack(fill='x', padx=10, pady=(0, 10))
 
-
 @dataclass
 class NavItem:
     icon: str = 'settings.png'
     name: str = 'Settings'
     page: object = Page
     side: str = 'bottom'
-
 
 class Theme(ttk.Frame):
     def __init__(self: object, parent: object, theme: object) -> ttk.Frame:
@@ -78,7 +75,7 @@ class Acceleration(ttk.Frame):
         self.header.pack(side='left', anchor='c', fill='y', pady=10, padx=10)
 
         ttk.Label(self, text='Fast').pack(side='right', anchor='c', fill='y', pady=10, padx=10)
-        ttk.Scale(self, variable=self.acceleration, from_=0, to=8, command=self.__on_acceleration).pack(side='right', anchor='c', fill='x', ipadx=20)
+        ttk.Scale(self, variable=self.acceleration, from_=1, to=8, command=self.__on_acceleration).pack(side='right', anchor='c', fill='x', ipadx=20)
         ttk.Label(self, text='Slow').pack(side='right', anchor='c', fill='y', pady=10, padx=10)
 
         # bind theme change

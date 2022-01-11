@@ -1,13 +1,17 @@
 from tkinter import ttk
 from dataclasses import dataclass
 from Components.Converter import MegabytesToGigabytes
+from Components.ErrorHandler import ErrMsg
 
 class Page(ttk.Frame):
     def __init__(self: object, parent: object, props: dict = {}) -> ttk.Frame:
         super().__init__(parent)
         # page layout
         for video_card in props['hardware'].get_gpus():
-            VideoCard(self, video_card).pack(fill='x', padx=10, pady=(0, 10))
+            try:
+                VideoCard(self, video_card).pack(fill='x', padx=10, pady=(0, 10))
+            except Exception as err_obj:
+                ErrMsg(self, err_obj).pack(fill='x', padx=10, pady=(0, 10))
 
 class VideoCard(ttk.Frame):
     def __init__(self: object, parent: object, video_card: dict) -> ttk.Frame:
@@ -19,15 +23,9 @@ class VideoCard(ttk.Frame):
         ttk.Label(self, text=f'Driver version: {video_card["driver_version"]}', style='small.TLabel').pack(side='top', fill='x', padx=10)
         ttk.Label(self, text=f'Current refresh: {video_card["refresh_rate"]} Hz', style='small.TLabel').pack(side='top', fill='x', padx=10, pady=(0, 10))
 
-
-
-
-
 @dataclass
 class NavItem:
     icon: str = 'gpu.png'
     name: str = 'Video Card'
     page: object = Page
     side: str = 'top'
-
-# get_gpus

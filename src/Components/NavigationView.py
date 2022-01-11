@@ -19,7 +19,7 @@ class NavigationView(ttk.Frame):
         self.acceleration: float = 1.0
 
         # nav bar stuff
-        self.vav_selection: StringVar = StringVar(value='')
+        self.nav_selection: StringVar = StringVar(value='')
 
         self.navbar: ttk.Frame = ttk.Frame(self, style='dark.TFrame')
         # yeah, line below is .... overturtled, but for now i will leave it here ...
@@ -67,13 +67,13 @@ class NavigationView(ttk.Frame):
             'Light': PhotoImage(file=fr'Resources\\Icons\\Light\\{item.icon}')
         }
         # create radiobutton
-        self.radiobuttons[item.name] = ttk.Radiobutton(self.navbar, image=self.icon_cache[item.name][self.theme.get_theme()], text=item.name, compound='left', value=item.name, variable=self.vav_selection, command=self.__show_panel)
+        self.radiobuttons[item.name] = ttk.Radiobutton(self.navbar, image=self.icon_cache[item.name][self.theme.get_theme()], text=item.name, compound='left', value=item.name, variable=self.nav_selection, command=self.__show_panel)
         self.radiobuttons[item.name].pack(side=item.side, fill='x', padx=10, pady=(10, 0))
         # store page in dict
         self.panels[item.name] = item.page(self.content, props=props)
 
     def __show_panel(self: object) -> None:
-        selected_panel: str = self.vav_selection.get()
+        selected_panel: str = self.nav_selection.get()
         for panel in self.panels:
             if panel != selected_panel:
                 self.panels[panel].pack_forget()
@@ -93,6 +93,9 @@ class NavigationView(ttk.Frame):
         for button in self.radiobuttons:
             self.radiobuttons[button].configure(image=self.icon_cache[button][theme])
         # update header
-        selected_panel: str = self.vav_selection.get()
+        selected_panel: str = self.nav_selection.get()
         self.header_label.configure(text=selected_panel.capitalize(), image=self.icon_cache[selected_panel][self.theme.get_theme()])
 
+    def select(self: object, page: str) -> None:
+        self.nav_selection.set(page)
+        self.__show_panel()

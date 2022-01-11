@@ -58,6 +58,9 @@ class Theme:
             'big.TLabel', background=self.colors[theme][1], font=('catamaran 16 bold'))
         self.parent.layout.configure(
             'small.TLabel', background=self.colors[theme][0], font=('catamaran 10 bold'))
+
+        self.parent.layout.configure(
+            'dark.TLabel', background=self.colors[theme][0], font=('catamaran 13 bold'), anchor='c')
         # rqadio button
         self.parent.layout.configure('TRadiobutton', background=self.colors[theme][0], relief='flat', font=(
             'catamaran 13 bold'), foreground=self.colors[theme][3], anchor='w', padding=5, width=12)
@@ -69,7 +72,6 @@ class Theme:
         self.parent.layout.configure('Vertical.TScrollbar', gripcount=0, relief='flat', background=self.colors[theme][1], darkcolor=self.colors[theme][1], lightcolor=self.colors[theme][1], troughcolor=self.colors[theme][1], bordercolor=self.colors[theme][1])
         self.parent.layout.map('Vertical.TScrollbar', background=[('pressed', '!disabled', self.colors[theme][0]), (
             'disabled', self.colors[theme][1]), ('active', self.colors[theme][0]), ('!active', self.colors[theme][0])])
-
         # scale
         self.parent.layout.configure('Horizontal.TScale', troughcolor=self.colors[theme][0], background=self.colors[theme][1], relief='flat', gripcount=0, darkcolor=self.colors[theme][0], lightcolor=self.colors[theme][0], bordercolor=self.colors[theme][0])
         self.parent.layout.map('Horizontal.TScale', background=[('pressed', '!disabled', self.colors[theme][2]), ('active', self.colors[theme][2])])
