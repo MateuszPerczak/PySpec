@@ -28,7 +28,7 @@ class PySpec(Tk):
         self.navigation: NavigationView = NavigationView(self, theme=self.theme)
         self.navigation.pack(anchor='c', fill='both', expand=True)
         # nav items
-        self.navigation.add_item(Settings.NavItem(), props={'theme': self.theme})
+        self.navigation.add_item(Settings.NavItem(), props={'theme': self.theme, 'navigation': self.navigation})
         self.navigation.add_item(Processor.NavItem(), props={'hardware': self.provider})
         self.navigation.add_item(VideoCard.NavItem(), props={'hardware': self.provider})
         self.navigation.add_item(Memory.NavItem(), props={'hardware': self.provider})

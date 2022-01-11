@@ -1,4 +1,5 @@
 from tkinter import Tk, ttk
+from typing import Callable
 from Components.SystemTheme import get_theme
 
 class Layout:
@@ -30,13 +31,14 @@ class Theme:
         self.parent = parent
         self.colors: dict = {'Dark': ['#111', '#212121', '#333', '#fff'], 'Light': [
             '#fff', '#ecf0f1', '#ecf0f1', '#000']}
-
+        # get system theme
         self.system_theme: str = get_theme()
-
-
         self.colors['System'] = self.colors[self.system_theme]
-        
+        # set default applied theme
         self.applied_theme: str = 'Light'
+        # methode list
+        self.__binded_methods: list = []
+
 
     def apply(self: object, theme: str) -> None:
         self.applied_theme = theme
@@ -68,6 +70,12 @@ class Theme:
         self.parent.layout.map('Vertical.TScrollbar', background=[('pressed', '!disabled', self.colors[theme][0]), (
             'disabled', self.colors[theme][1]), ('active', self.colors[theme][0]), ('!active', self.colors[theme][0])])
 
+        # scale
+        self.parent.layout.configure('Horizontal.TScale', troughcolor=self.colors[theme][0], background=self.colors[theme][1], relief='flat', gripcount=0, darkcolor=self.colors[theme][0], lightcolor=self.colors[theme][0], bordercolor=self.colors[theme][0])
+        self.parent.layout.map('Horizontal.TScale', background=[('pressed', '!disabled', self.colors[theme][2]), ('active', self.colors[theme][2])])
+        # raise event
+        self.theme_changed(theme)
+
 
     def get_theme(self: object) -> str:
         if self.applied_theme == 'System':
@@ -77,3 +85,12 @@ class Theme:
     def get_internal_theme(self: object) -> str:
         return self.applied_theme
 
+    def theme_changed(self: object, theme: str) -> None:
+        for methode in self.__binded_methods:
+            methode(theme)
+
+    def bind(self: object, methode: Callable) -> None:
+        self.__binded_methods.append(methode)
+
+    def get_colors(self: object, theme: str) -> list:
+        return self.colors[theme]
