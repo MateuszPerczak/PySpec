@@ -1,6 +1,6 @@
 # PySpec
 
-# PySpec is a system profiling and monitoring application for Microsoft Windows that detects the cpu, gpu, ram, motherboard and other devices.
+# PySpec is a system profiling and monitoring application that detects the cpu, gpu, ram, motherboard and other devices.
 
 ## Python version:
 
