@@ -7,7 +7,6 @@ class Layout:
     def __init__(self: object, parent: Tk) -> object:
         # pass parent object
         self.parent = parent
-
         # init theme object
         self.parent.layout = ttk.Style()
         # set theme to clam
