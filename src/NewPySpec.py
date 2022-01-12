@@ -1,9 +1,10 @@
 from tkinter import Tk
-from Pages import Settings, Processor, Memory, Storage, VideoCard, Motherboard
+from Pages import Settings, Processor, Memory, Storage, VideoCard, Motherboard, Network
 from Components import View
 from Components.NavigationView import NavigationView
 from Components.Inithandler import InitPage
 from Components.SysInfo import Provider
+
 
 class PySpec(Tk):
     def __init__(self: object) -> object:
@@ -34,17 +35,27 @@ class PySpec(Tk):
         self.__init_gui()
 
     def __init_gui(self: object) -> object:
-        self.navigation: NavigationView = NavigationView(self, theme=self.theme)
+        self.navigation: NavigationView = NavigationView(
+            self, theme=self.theme)
         self.navigation.pack(anchor='c', fill='both', expand=True)
         # nav items
-        self.navigation.add_item(Settings.NavItem(), props={'theme': self.theme, 'navigation': self.navigation})
-        self.navigation.add_item(Processor.NavItem(), props={'hardware': self.provider})
-        self.navigation.add_item(VideoCard.NavItem(), props={'hardware': self.provider})
-        self.navigation.add_item(Memory.NavItem(), props={'hardware': self.provider})
-        self.navigation.add_item(Motherboard.NavItem(), props={'hardware': self.provider})
-        self.navigation.add_item(Storage.NavItem(), props={'hardware': self.provider})
+        self.navigation.add_item(Settings.NavItem(), props={
+                                 'theme': self.theme, 'navigation': self.navigation})
+        self.navigation.add_item(Processor.NavItem(), props={
+                                 'hardware': self.provider})
+        self.navigation.add_item(VideoCard.NavItem(), props={
+                                 'hardware': self.provider})
+        self.navigation.add_item(Memory.NavItem(), props={
+                                 'hardware': self.provider})
+        self.navigation.add_item(Motherboard.NavItem(), props={
+                                 'hardware': self.provider})
+        self.navigation.add_item(Storage.NavItem(), props={
+                                 'hardware': self.provider})
+        self.navigation.add_item(Network.NavItem(), props={
+                                 'hardware': self.provider})
         # select forst page
         self.navigation.select('Processor')
+
 
 if __name__ == '__main__':
     PySpec().mainloop()

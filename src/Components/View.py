@@ -2,6 +2,7 @@ from tkinter import Tk, ttk
 from typing import Callable
 from Components.SystemTheme import get_theme
 
+
 class Layout:
     def __init__(self: object, parent: Tk) -> object:
         # pass parent object
@@ -39,7 +40,6 @@ class Theme:
         # methode list
         self.__binded_methods: list = []
 
-
     def apply(self: object, theme: str) -> None:
         self.applied_theme = theme
         # pass parent object
@@ -51,33 +51,35 @@ class Theme:
             'dark.TFrame', background=self.colors[theme][0])
         # label
         self.parent.layout.configure('TLabel', background=self.colors[theme][0], relief='flat', font=(
-            'catamaran 12 bold'), foreground=self.colors[theme][3])
+            'catamaran 13 bold'), foreground=self.colors[theme][3])
         self.parent.layout.configure('center.TLabel', background=self.colors[theme][0], relief='flat', font=(
-            'catamaran 12 bold'), foreground=self.colors[theme][3], anchor='c')
+            'catamaran 13 bold'), foreground=self.colors[theme][3], anchor='c')
         self.parent.layout.configure(
             'big.TLabel', background=self.colors[theme][1], font=('catamaran 16 bold'))
         self.parent.layout.configure(
-            'small.TLabel', background=self.colors[theme][0], font=('catamaran 10 bold'))
+            'small.TLabel', background=self.colors[theme][0], font=('catamaran 11 bold'))
 
         self.parent.layout.configure(
             'dark.TLabel', background=self.colors[theme][0], font=('catamaran 13 bold'), anchor='c')
         # rqadio button
         self.parent.layout.configure('TRadiobutton', background=self.colors[theme][0], relief='flat', font=(
-            'catamaran 13 bold'), foreground=self.colors[theme][3], anchor='w', padding=5, width=12)
+            'catamaran 13 bold'), foreground=self.colors[theme][3], anchor='w', padding=5, width=13)
         self.parent.layout.map('TRadiobutton', background=[('pressed', '!disabled', self.colors[theme][1]), (
             'active', self.colors[theme][1]), ('selected', self.colors[theme][1])])
         self.parent.layout.configure('small.TRadiobutton',
-                              anchor='center', padding=5, width=8)
+                                     anchor='center', padding=5, width=8)
         # scrollbar
-        self.parent.layout.configure('Vertical.TScrollbar', gripcount=0, relief='flat', background=self.colors[theme][1], darkcolor=self.colors[theme][1], lightcolor=self.colors[theme][1], troughcolor=self.colors[theme][1], bordercolor=self.colors[theme][1])
+        self.parent.layout.configure('Vertical.TScrollbar', gripcount=0, relief='flat', background=self.colors[theme][1], darkcolor=self.colors[
+                                     theme][1], lightcolor=self.colors[theme][1], troughcolor=self.colors[theme][1], bordercolor=self.colors[theme][1])
         self.parent.layout.map('Vertical.TScrollbar', background=[('pressed', '!disabled', self.colors[theme][0]), (
             'disabled', self.colors[theme][1]), ('active', self.colors[theme][0]), ('!active', self.colors[theme][0])])
         # scale
-        self.parent.layout.configure('Horizontal.TScale', troughcolor=self.colors[theme][0], background=self.colors[theme][1], relief='flat', gripcount=0, darkcolor=self.colors[theme][0], lightcolor=self.colors[theme][0], bordercolor=self.colors[theme][0])
-        self.parent.layout.map('Horizontal.TScale', background=[('pressed', '!disabled', self.colors[theme][2]), ('active', self.colors[theme][2])])
+        self.parent.layout.configure('Horizontal.TScale', troughcolor=self.colors[theme][0], background=self.colors[theme][1], relief='flat',
+                                     gripcount=0, darkcolor=self.colors[theme][0], lightcolor=self.colors[theme][0], bordercolor=self.colors[theme][0])
+        self.parent.layout.map('Horizontal.TScale', background=[(
+            'pressed', '!disabled', self.colors[theme][2]), ('active', self.colors[theme][2])])
         # raise event
         self.theme_changed(theme)
-
 
     def get_theme(self: object) -> str:
         if self.applied_theme == 'System':
