@@ -1,7 +1,7 @@
 from tkinter import ttk
 from dataclasses import dataclass
 from Components.ErrorHandler import ErrMsg
-from Components.Converter import KilobytesToMegabytes
+
 
 class Page(ttk.Frame):
     def __init__(self: object, parent: object, props: dict) -> ttk.Frame:
@@ -12,6 +12,7 @@ class Page(ttk.Frame):
                     fill='x', padx=10, pady=(0, 10))
             except Exception as err_obj:
                 ErrMsg(self, err_obj).pack(fill='x', padx=10, pady=(0, 10))
+
 
 class NetworkCard(ttk.Frame):
     def __init__(self: object, parent: object, adapter: dict) -> ttk.Frame:
@@ -24,6 +25,7 @@ class NetworkCard(ttk.Frame):
             side='top', fill='x', padx=10)
         ttk.Label(self, text=f'Mac address: {adapter["mac_address"]}', style='small.TLabel').pack(
             side='top', fill='x', padx=10, pady=(0, 10))
+
 
 @dataclass
 class NavItem:
