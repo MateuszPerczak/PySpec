@@ -4,6 +4,7 @@ from Components import View
 from Components.NavigationView import NavigationView
 from Components.Inithandler import InitPage
 from Components.SysInfo import Provider
+# from Components.Debugger import Debugger
 
 
 class PySpec(Tk):

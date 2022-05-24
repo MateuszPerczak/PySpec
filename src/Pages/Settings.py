@@ -27,15 +27,16 @@ class Theme(ttk.Frame):
         # local variable
         self.theme: StringVar = StringVar(value=theme.get_internal_theme())
 
-        self.icon_cache = {'info': {
-            'Dark': PhotoImage(file=r'Resources\\Icons\\Dark\\info.png'),
-            'Light': PhotoImage(file=r'Resources\\Icons\\Light\\info.png')
+        self.icon_cache = {
+            'info': {
+                'Dark': PhotoImage(file=r'Resources\\Icons\\Dark\\info.png'),
+                'Light': PhotoImage(file=r'Resources\\Icons\\Light\\info.png')
 
-        },
+            },
             'brush': {
-            'Dark': PhotoImage(file=r'Resources\\Icons\\Dark\\brush.png'),
-            'Light': PhotoImage(file=r'Resources\\Icons\\Light\\brush.png')
-        },
+                'Dark': PhotoImage(file=r'Resources\\Icons\\Dark\\brush.png'),
+                'Light': PhotoImage(file=r'Resources\\Icons\\Light\\brush.png')
+            },
         }
 
         theme_panel: ttk.Frame = ttk.Frame(self, style='dark.TFrame')
@@ -65,13 +66,9 @@ class Acceleration(ttk.Frame):
     def __init__(self: object, parent: object, props: object) -> ttk.Frame:
         super().__init__(parent, style='dark.TFrame')
         # local variable
-
         self.acceleration: DoubleVar = DoubleVar(value=1.0)
-
         self.navigation = props['navigation']
-
         self.theme = props['theme']
-
         self.icon_cache = {
             'Dark': PhotoImage(file=r'Resources\\Icons\\Dark\\scroll.png'),
             'Light': PhotoImage(file=r'Resources\\Icons\\Light\\scroll.png')
@@ -80,14 +77,12 @@ class Acceleration(ttk.Frame):
         self.header: ttk.Label = ttk.Label(self, image=self.icon_cache[self.theme.get_theme(
         )], text='Wheel acceleration', compound='left')
         self.header.pack(side='left', anchor='c', fill='y', pady=10, padx=10)
-
         ttk.Label(self, text='Fast').pack(side='right',
                                           anchor='c', fill='y', pady=10, padx=10)
         ttk.Scale(self, variable=self.acceleration, from_=1, to=8, command=self.__on_acceleration).pack(
             side='right', anchor='c', fill='x', ipadx=20)
         ttk.Label(self, text='Slow').pack(side='right',
                                           anchor='c', fill='y', pady=10, padx=10)
-
         # bind theme change
         self.theme.bind(self.__on_theme_changed)
 
